@@ -512,6 +512,8 @@ if generate_button:
             )
 
             graph = build_recipe_graph()
+            
+            
 
             # ------------------------------------------------
             # STATUS
@@ -1034,7 +1036,29 @@ if generate_button:
             st.warning(
                 "No recipes were generated."
             )
-
+        # ====================================================
+        # RECIPE SUMMARY
+        # ====================================================
+        
+        recipe_summary = result.get(
+            "recipe_summary"
+        )
+        
+        if recipe_summary:
+        
+            st.markdown(
+                '<hr class="section-divider">',
+                unsafe_allow_html=True,
+            )
+        
+            st.header("🧑‍🍳 Summary Chef")
+        
+            st.info(
+                "This section provides a neutral summary of all "
+                "chef recipes. It does not recommend or rank any recipe."
+            )
+        
+            st.markdown(recipe_summary)
         # ====================================================
         # TOKEN USAGE & COST
         # ====================================================
@@ -1106,8 +1130,8 @@ if generate_button:
                 "### 📊 Total Workflow Usage"
             )
             
-            total_col1, total_col2, total_col3, total_col4 = (
-                st.columns(4)
+            total_col1, total_col2, total_col3 = (
+                st.columns(3)
             )
             
             with total_col1:
@@ -1140,12 +1164,12 @@ if generate_button:
                     ),
                 )
             
-            with total_col4:
+            # with total_col4:
             
-                st.metric(
-                    "Estimated Cost",
-                    f"${total_data.get('estimated_cost', 0.0):.6f}",
-                )
+            #     st.metric(
+            #         "Estimated Cost",
+            #         f"${total_data.get('estimated_cost', 0.0):.6f}",
+            #     )
         else:
             
                         st.info(

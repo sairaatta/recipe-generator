@@ -94,8 +94,7 @@ class RecipeState(BaseModel):
     # FINAL SUMMARY
     # --------------------------------------------------
 
-    final_summary: Optional[str] = None
-
+    recipe_summary: str | None = None
     # --------------------------------------------------
     # WORKFLOW CONTROL
     # --------------------------------------------------

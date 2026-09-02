@@ -1,3 +1,4 @@
+
 import logging
 
 from langgraph.graph import StateGraph, START, END
@@ -7,6 +8,7 @@ from .input_decision import input_decision
 from .orchestrator import orchestrator
 from .research import mcp_research
 from .chefs import chef_node
+from .summary_chef import summarize_recipes
 from .cost_estimator import estimate_costs
 
 
@@ -73,9 +75,7 @@ def collect_recipes(state: RecipeState):
     Recipes are already stored in state.recipes by chef_node.
     """
 
-    logger.info(
-        "Collecting recipes"
-    )
+    logger.info("Collecting recipes")
 
     recipe_count = len(state.recipes)
 
@@ -86,8 +86,74 @@ def collect_recipes(state: RecipeState):
 
     return {
         "status": "recipes_generated",
-        "next_step": "cost_estimator",
+        "next_step": "summary_chef",
     }
+
+
+# ============================================================
+# SUMMARY CHEF
+# ============================================================
+
+def summary_chef_node(state: RecipeState):
+    """
+    Generate a neutral summary of all generated recipes.
+
+    The Summary Chef does NOT rank or recommend recipes.
+    """
+
+    logger.info(
+        "Summary Chef started | recipes=%d",
+        len(state.recipes),
+    )
+
+    try:
+
+        # ----------------------------------------------------
+        # SAFETY CHECK
+        # ----------------------------------------------------
+
+        if not state.recipes:
+
+            logger.warning(
+                "Summary Chef skipped because no recipes exist."
+            )
+
+            return {
+                "recipe_summary": None,
+                "status": "no_recipes",
+                "next_step": "cost_estimator",
+            }
+
+        # ----------------------------------------------------
+        # GENERATE SUMMARY
+        # ----------------------------------------------------
+
+        summary = summarize_recipes(
+            state.recipes
+        )
+
+        logger.info(
+            "Summary Chef completed successfully."
+        )
+
+        return {
+            "recipe_summary": summary,
+            "status": "summary_generated",
+            "next_step": "cost_estimator",
+        }
+
+    except Exception as exc:
+
+        logger.exception(
+            "Summary Chef failed"
+        )
+
+        return {
+            "recipe_summary": None,
+            "error": str(exc),
+            "status": "summary_failed",
+            "next_step": "cost_estimator",
+        }
 
 
 # ============================================================
@@ -114,6 +180,8 @@ def build_recipe_graph():
         ↙       ↘
       chef     collect
        ↑          ↓
+       │      summary_chef
+       │          ↓
        │      estimate_costs
        │          ↓
        └──────── END
@@ -154,6 +222,11 @@ def build_recipe_graph():
     builder.add_node(
         "collect",
         collect_recipes,
+    )
+
+    builder.add_node(
+        "summary_chef",
+        summary_chef_node,
     )
 
     builder.add_node(
@@ -211,11 +284,20 @@ def build_recipe_graph():
     )
 
     # ========================================================
-    # COLLECT → COST ESTIMATION
+    # COLLECT → SUMMARY CHEF
     # ========================================================
 
     builder.add_edge(
         "collect",
+        "summary_chef",
+    )
+
+    # ========================================================
+    # SUMMARY CHEF → COST ESTIMATION
+    # ========================================================
+
+    builder.add_edge(
+        "summary_chef",
         "estimate_costs",
     )
 

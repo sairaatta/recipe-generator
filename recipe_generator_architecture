@@ -1,0 +1,31 @@
+digraph "Recipe Generator Architecture" {
+	bgcolor=white nodesep=0.5 pad=0.5 rankdir=TB ranksep=0.7
+	node [fontname=Arial fontsize=11 margin="0.2,0.12" shape=box style=rounded]
+	edge [fontname=Arial fontsize=9]
+	start [label="User Input
+(Streamlit)" shape=oval]
+	input [label="Input Decision"]
+	orchestrator [label="Orchestrator
+Determine dishes / workflow"]
+	mcp [label="MCP Recipe Research
+Parallel research"]
+	chef [label="Generic Chef Node
+Sequential execution
+Chef 1 → Chef 2 → ... → Chef N"]
+	collect [label="Collect Recipes"]
+	summary [label="Summary Chef
+Neutral summary"]
+	cost [label="Cost Estimator
+Tokens + Cost"]
+	end [label="Final Results
+(Streamlit)" shape=oval]
+	start -> input
+	input -> orchestrator
+	orchestrator -> mcp
+	mcp -> chef
+	chef -> chef [label="More dishes"]
+	chef -> collect [label="All dishes done"]
+	collect -> summary
+	summary -> cost
+	cost -> end
+}

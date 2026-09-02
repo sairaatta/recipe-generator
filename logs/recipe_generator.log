@@ -25939,3 +25939,683 @@ groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached
 2026-09-01 22:56:19,460 | INFO | src.recipe_generator.generator | Chef 3 prompt size: 1177 characters
 2026-09-01 22:56:19,598 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
 2026-09-01 22:56:19,600 | INFO | groq._base_client | Retrying request to /openai/v1/chat/completions in 60.000000 seconds
+2026-09-02 10:39:24,528 | INFO | src.recipe_generator.logging_config | Logging initialized. Log file: C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\logs\recipe_generator.log
+2026-09-02 10:41:09,481 | INFO | __main__ | Streamlit request received: I want recipe of tacos, chinese rice
+2026-09-02 10:41:09,481 | INFO | src.recipe_generator.graph | Building LangGraph
+2026-09-02 10:41:09,505 | INFO | src.recipe_generator.graph | LangGraph compiled successfully
+2026-09-02 10:41:09,534 | INFO | src.recipe_generator.input_decision | Phase 12: Input decision started
+2026-09-02 10:41:09,537 | INFO | src.recipe_generator.input_router | No location detected in recommendation request
+2026-09-02 10:41:09,538 | INFO | src.recipe_generator.input_router | Input decision: explicit recipe request
+2026-09-02 10:41:09,539 | INFO | src.recipe_generator.input_router | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 10:41:09,539 | INFO | src.recipe_generator.input_decision | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 10:41:09,539 | INFO | src.recipe_generator.input_decision | Explicit recipe request detected
+2026-09-02 10:41:09,539 | INFO | src.recipe_generator.input_decision | Weather tool skipped for explicit request
+2026-09-02 10:41:09,541 | INFO | src.recipe_generator.orchestrator | Orchestrator started
+2026-09-02 10:41:09,541 | INFO | src.recipe_generator.orchestrator | Input mode: explicit
+2026-09-02 10:41:09,541 | INFO | src.recipe_generator.orchestrator | Explicit recipe request detected
+2026-09-02 10:41:09,542 | INFO | src.recipe_generator.orchestrator | Extracted dishes from user request: ['tacos', 'chinese rice']
+2026-09-02 10:41:09,542 | INFO | src.recipe_generator.orchestrator | Final dishes: ['tacos', 'chinese rice']
+2026-09-02 10:41:09,542 | INFO | src.recipe_generator.orchestrator | Number of dishes: 2
+2026-09-02 10:41:09,543 | INFO | src.recipe_generator.research | MCP research started
+2026-09-02 10:41:09,543 | INFO | src.recipe_generator.research | MCP research queries: ['tacos', 'chinese rice']
+2026-09-02 10:41:09,543 | INFO | src.recipe_generator.research | Number of MCP research queries: 2
+2026-09-02 10:41:09,544 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP batch research for 2 queries
+2026-09-02 10:41:09,544 | INFO | src.recipe_generator.mcp_client | MCP batch queries: ['tacos', 'chinese rice']
+2026-09-02 10:41:09,547 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP research for 2 queries
+2026-09-02 10:41:09,547 | INFO | src.recipe_generator.mcp_client | MCP queries: ['tacos', 'chinese rice']
+2026-09-02 10:41:09,724 | ERROR | src.recipe_generator.mcp_client | MCP session failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 201, in _search_multiple_recipes_async
+  |     async with streamable_http_client(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 688, in streamable_http_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 705, in streamable_http_client
+    |     yield read_stream, write_stream
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 203, in _search_multiple_recipes_async
+    |     ) as (
+    |          ^
+    | ValueError: not enough values to unpack (expected 3, got 2)
+    +------------------------------------
+2026-09-02 10:41:09,732 | INFO | src.recipe_generator.mcp_client | Parallel MCP batch research completed: 2 results
+2026-09-02 10:41:09,733 | INFO | src.recipe_generator.research | Research result 1/2 stored for dish: tacos
+2026-09-02 10:41:09,733 | WARNING | src.recipe_generator.research | No research result returned for dish: tacos
+2026-09-02 10:41:09,733 | INFO | src.recipe_generator.research | Research result 2/2 stored for dish: chinese rice
+2026-09-02 10:41:09,733 | WARNING | src.recipe_generator.research | No research result returned for dish: chinese rice
+2026-09-02 10:41:09,733 | INFO | src.recipe_generator.research | MCP research completed successfully
+2026-09-02 10:41:09,734 | INFO | src.recipe_generator.research | Number of research results: 2
+2026-09-02 10:41:09,734 | INFO | src.recipe_generator.research | MCP search time: 0.19 seconds
+2026-09-02 10:41:09,734 | INFO | src.recipe_generator.research | Total MCP research time: 0.19 seconds
+2026-09-02 10:41:09,735 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/2: tacos
+2026-09-02 10:41:09,735 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: tacos
+2026-09-02 10:41:09,735 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: tacos
+2026-09-02 10:41:09,735 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: tacos
+2026-09-02 10:41:09,735 | INFO | src.recipe_generator.llm | Creating Groq text model: openai/gpt-oss-20b
+2026-09-02 10:41:10,172 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 10:41:10,173 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1171 characters
+2026-09-02 10:41:11,539 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 10:41:11,562 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.39 seconds using openai/gpt-oss-20b
+2026-09-02 10:41:11,562 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 10:41:11,562 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=360 | output=605 | total=965
+2026-09-02 10:41:11,563 | INFO | src.recipe_generator.generator | Chef 1 response size: 518 characters
+2026-09-02 10:41:11,563 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{"name":"Beef Tacos","description":"Quick beef tacos with fresh toppings.","ingredients":[{"name":"corn tortillas","quantity":"8"},{"name":"ground beef","quantity":"1 lb"},{"name":"shredded lettuce","quantity":"1 cup"},{"name":"diced tomatoes","quantity":"1 cup"},{"name":"shredded cheddar cheese","quantity":"1 cup"}],"instructions":["Cook beef until browned.","Warm tortillas in skillet.","Fill tortillas with beef.","Top with lettuce, tomatoes, cheese.","Serve immediately."],"cooking_time_minutes":20,"servings":4}
+2026-09-02 10:41:11,563 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 518 characters
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.generator | Chef 1 validation successful: Beef Tacos
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | Chef 1 finished: Beef Tacos in 1.83 seconds
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | Chef 1 token usage | input=360 | output=605 | total=965
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | Chef 1 recipe stored: Beef Tacos
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | Chef 1 usage stored. Total usage records: 1
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | Chef progress: 1/2 dishes completed
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.chefs | More dishes remain. Next dish: chinese rice
+2026-09-02 10:41:11,564 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=2
+2026-09-02 10:41:11,571 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 10:41:11,572 | INFO | src.recipe_generator.chefs | Chef 2 processing dish 2/2: chinese rice
+2026-09-02 10:41:11,572 | INFO | src.recipe_generator.chefs | Chef 2 started for dish: chinese rice
+2026-09-02 10:41:11,573 | INFO | src.recipe_generator.chefs | Chef 2 using research for dish: chinese rice
+2026-09-02 10:41:11,573 | INFO | src.recipe_generator.generator | Chef 2 generating recipe for: chinese rice
+2026-09-02 10:41:11,574 | INFO | src.recipe_generator.generator | Chef 2 using model: openai/gpt-oss-20b
+2026-09-02 10:41:11,574 | INFO | src.recipe_generator.generator | Chef 2 prompt size: 1178 characters
+2026-09-02 10:41:12,387 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 generation completed in 0.82 seconds using openai/gpt-oss-20b
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 token usage | input=361 | output=425 | total=786
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 response size: 526 characters
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 raw response:
+{"name":"Stir-Fried Chinese Rice","description":"Quick, savory rice with veggies and soy.","ingredients":[{"name":"cooked jasmine rice","quantity":"2 cups"},{"name":"soy sauce","quantity":"2 tbsp"},{"name":"egg","quantity":"1"},{"name":"green peas","quantity":"1/2 cup"},{"name":"green onions","quantity":"2 tbsp"}],"instructions":["Heat oil in wok.","Scramble egg, set aside.","Add rice, stir-fry 2 minutes.","Add peas, soy sauce, cook 1 minute.","Fold in egg, garnish onions, serve."],"cooking_time_minutes":30,"servings":2}
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 cleaned JSON size: 526 characters
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.generator | Chef 2 validation successful: Stir-Fried Chinese Rice
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | Chef 2 finished: Stir-Fried Chinese Rice in 0.82 seconds
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | Chef 2 token usage | input=361 | output=425 | total=786
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | Chef 2 recipe stored: Stir-Fried Chinese Rice
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | Chef 2 usage stored. Total usage records: 2
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | Chef progress: 2/2 dishes completed
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.chefs | All dishes completed. Moving to summarizer.
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.graph | Chef routing | current_index=2 | total_dishes=2
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.graph | All dishes processed. Routing to collect.
+2026-09-02 10:41:12,389 | INFO | src.recipe_generator.graph | Collecting recipes
+2026-09-02 10:41:12,398 | INFO | src.recipe_generator.graph | Collected 2 recipes
+2026-09-02 10:41:12,399 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation started
+2026-09-02 10:41:12,400 | INFO | src.recipe_generator.cost_estimator | Chef 1 | input=360 | output=605 | total=965 | cost=0.001570
+2026-09-02 10:41:12,400 | INFO | src.recipe_generator.cost_estimator | Chef 2 | input=361 | output=425 | total=786 | cost=0.001211
+2026-09-02 10:41:12,400 | INFO | src.recipe_generator.cost_estimator | Total input tokens: 721
+2026-09-02 10:41:12,400 | INFO | src.recipe_generator.cost_estimator | Total output tokens: 1030
+2026-09-02 10:41:12,401 | INFO | src.recipe_generator.cost_estimator | Total tokens: 1751
+2026-09-02 10:41:12,401 | INFO | src.recipe_generator.cost_estimator | Total estimated cost: 0.002781
+2026-09-02 10:41:12,401 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation completed
+2026-09-02 10:41:12,402 | INFO | __main__ | Total recipe workflow completed in 2.88 seconds
+2026-09-02 11:42:50,008 | INFO | __main__ | Streamlit request received: i want buldak noodles, soda drink
+2026-09-02 11:42:50,042 | INFO | src.recipe_generator.graph | Building LangGraph
+2026-09-02 11:42:50,079 | INFO | src.recipe_generator.graph | LangGraph compiled successfully
+2026-09-02 11:42:50,135 | INFO | src.recipe_generator.input_decision | Phase 12: Input decision started
+2026-09-02 11:42:50,136 | INFO | src.recipe_generator.input_router | No location detected in recommendation request
+2026-09-02 11:42:50,136 | INFO | src.recipe_generator.input_router | Input decision: defaulting to explicit recipe
+2026-09-02 11:42:50,137 | INFO | src.recipe_generator.input_router | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 11:42:50,137 | INFO | src.recipe_generator.input_decision | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 11:42:50,137 | INFO | src.recipe_generator.input_decision | Explicit recipe request detected
+2026-09-02 11:42:50,137 | INFO | src.recipe_generator.input_decision | Weather tool skipped for explicit request
+2026-09-02 11:42:50,138 | INFO | src.recipe_generator.orchestrator | Orchestrator started
+2026-09-02 11:42:50,138 | INFO | src.recipe_generator.orchestrator | Input mode: explicit
+2026-09-02 11:42:50,138 | INFO | src.recipe_generator.orchestrator | Explicit recipe request detected
+2026-09-02 11:42:50,139 | INFO | src.recipe_generator.orchestrator | Extracted dishes from user request: ['i want buldak noodles', 'soda drink']
+2026-09-02 11:42:50,142 | INFO | src.recipe_generator.orchestrator | Final dishes: ['i want buldak noodles', 'soda drink']
+2026-09-02 11:42:50,142 | INFO | src.recipe_generator.orchestrator | Number of dishes: 2
+2026-09-02 11:42:50,143 | INFO | src.recipe_generator.research | MCP research started
+2026-09-02 11:42:50,143 | INFO | src.recipe_generator.research | MCP research queries: ['i want buldak noodles', 'soda drink']
+2026-09-02 11:42:50,143 | INFO | src.recipe_generator.research | Number of MCP research queries: 2
+2026-09-02 11:42:50,143 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP batch research for 2 queries
+2026-09-02 11:42:50,144 | INFO | src.recipe_generator.mcp_client | MCP batch queries: ['i want buldak noodles', 'soda drink']
+2026-09-02 11:42:50,160 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP research for 2 queries
+2026-09-02 11:42:50,160 | INFO | src.recipe_generator.mcp_client | MCP queries: ['i want buldak noodles', 'soda drink']
+2026-09-02 11:42:50,442 | ERROR | src.recipe_generator.mcp_client | MCP session failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 201, in _search_multiple_recipes_async
+  |     async with streamable_http_client(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 688, in streamable_http_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 705, in streamable_http_client
+    |     yield read_stream, write_stream
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 203, in _search_multiple_recipes_async
+    |     ) as (
+    |          ^
+    | ValueError: not enough values to unpack (expected 3, got 2)
+    +------------------------------------
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.mcp_client | Parallel MCP batch research completed: 2 results
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | Research result 1/2 stored for dish: i want buldak noodles
+2026-09-02 11:42:50,444 | WARNING | src.recipe_generator.research | No research result returned for dish: i want buldak noodles
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | Research result 2/2 stored for dish: soda drink
+2026-09-02 11:42:50,444 | WARNING | src.recipe_generator.research | No research result returned for dish: soda drink
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | MCP research completed successfully
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | Number of research results: 2
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | MCP search time: 0.31 seconds
+2026-09-02 11:42:50,444 | INFO | src.recipe_generator.research | Total MCP research time: 0.31 seconds
+2026-09-02 11:42:50,457 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/2: i want buldak noodles
+2026-09-02 11:42:50,457 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: i want buldak noodles
+2026-09-02 11:42:50,458 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: i want buldak noodles
+2026-09-02 11:42:50,458 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: i want buldak noodles
+2026-09-02 11:42:50,458 | INFO | src.recipe_generator.llm | Creating Groq text model: openai/gpt-oss-20b
+2026-09-02 11:42:50,627 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 11:42:50,627 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1187 characters
+2026-09-02 11:42:52,090 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:42:52,090 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.48 seconds using openai/gpt-oss-20b
+2026-09-02 11:42:52,090 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 11:42:52,090 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=363 | output=501 | total=864
+2026-09-02 11:42:52,105 | INFO | src.recipe_generator.generator | Chef 1 response size: 568 characters
+2026-09-02 11:42:52,105 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{"name":"Buldak Noodles","description":"Spicy Korean ramen with fiery sauce.","ingredients":[{"name":"Instant ramen noodles","quantity":"1 pack"},{"name":"Gochujang sauce","quantity":"2 tbsp"},{"name":"Garlic, minced","quantity":"1 clove"},{"name":"Sesame oil","quantity":"1 tsp"},{"name":"Green onions, sliced","quantity":"2 stalks"}],"instructions":["Boil noodles until al dente.","Drain and set aside.","Heat oil, sauté garlic until fragrant.","Add noodles, gochujang, stir until coated.","Top with green onions, serve hot."],"cooking_time_minutes":30,"servings":2}
+2026-09-02 11:42:52,106 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 568 characters
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.generator | Chef 1 validation successful: Buldak Noodles
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.chefs | Chef 1 finished: Buldak Noodles in 1.65 seconds
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.chefs | Chef 1 token usage | input=363 | output=501 | total=864
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.chefs | Chef 1 recipe stored: Buldak Noodles
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.chefs | Chef 1 usage stored. Total usage records: 1
+2026-09-02 11:42:52,110 | INFO | src.recipe_generator.chefs | Chef progress: 1/2 dishes completed
+2026-09-02 11:42:52,111 | INFO | src.recipe_generator.chefs | More dishes remain. Next dish: soda drink
+2026-09-02 11:42:52,111 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=2
+2026-09-02 11:42:52,111 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.chefs | Chef 2 processing dish 2/2: soda drink
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.chefs | Chef 2 started for dish: soda drink
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.chefs | Chef 2 using research for dish: soda drink
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.generator | Chef 2 generating recipe for: soda drink
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.generator | Chef 2 using model: openai/gpt-oss-20b
+2026-09-02 11:42:52,112 | INFO | src.recipe_generator.generator | Chef 2 prompt size: 1176 characters
+2026-09-02 11:42:52,626 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:42:52,627 | INFO | src.recipe_generator.generator | Chef 2 generation completed in 0.51 seconds using openai/gpt-oss-20b
+2026-09-02 11:42:52,627 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 11:42:52,627 | INFO | src.recipe_generator.generator | Chef 2 token usage | input=361 | output=295 | total=656
+2026-09-02 11:42:52,627 | INFO | src.recipe_generator.generator | Chef 2 response size: 466 characters
+2026-09-02 11:42:52,628 | INFO | src.recipe_generator.generator | Chef 2 raw response:
+{"name":"Mint Lemon Sparkling Soda","description":"Refreshing lemon sparkling soda with mint.","ingredients":[{"name":"Sparkling water","quantity":"200ml"},{"name":"Lemon juice","quantity":"30ml"},{"name":"Simple syrup","quantity":"15ml"},{"name":"Mint leaves","quantity":"5"},{"name":"Ice","quantity":"5 cubes"}],"instructions":["Fill glass with ice","Add lemon juice","Pour sparkling water","Stir gently","Garnish with mint"],"cooking_time_minutes":5,"servings":2}
+2026-09-02 11:42:52,628 | INFO | src.recipe_generator.generator | Chef 2 cleaned JSON size: 466 characters
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.generator | Chef 2 validation successful: Mint Lemon Sparkling Soda
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | Chef 2 finished: Mint Lemon Sparkling Soda in 0.52 seconds
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | Chef 2 token usage | input=361 | output=295 | total=656
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | Chef 2 recipe stored: Mint Lemon Sparkling Soda
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | Chef 2 usage stored. Total usage records: 2
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | Chef progress: 2/2 dishes completed
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.chefs | All dishes completed. Moving to summarizer.
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.graph | Chef routing | current_index=2 | total_dishes=2
+2026-09-02 11:42:52,630 | INFO | src.recipe_generator.graph | All dishes processed. Routing to collect.
+2026-09-02 11:42:52,631 | INFO | src.recipe_generator.graph | Collecting recipes
+2026-09-02 11:42:52,631 | INFO | src.recipe_generator.graph | Collected 2 recipes
+2026-09-02 11:42:52,632 | INFO | src.recipe_generator.graph | Summary Chef started | recipes=2
+2026-09-02 11:42:53,490 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:42:53,492 | INFO | src.recipe_generator.graph | Summary Chef completed successfully.
+2026-09-02 11:42:53,493 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation started
+2026-09-02 11:42:53,493 | INFO | src.recipe_generator.cost_estimator | Chef 1 | input=363 | output=501 | total=864 | cost=0.001365
+2026-09-02 11:42:53,494 | INFO | src.recipe_generator.cost_estimator | Chef 2 | input=361 | output=295 | total=656 | cost=0.000951
+2026-09-02 11:42:53,494 | INFO | src.recipe_generator.cost_estimator | Total input tokens: 724
+2026-09-02 11:42:53,494 | INFO | src.recipe_generator.cost_estimator | Total output tokens: 796
+2026-09-02 11:42:53,494 | INFO | src.recipe_generator.cost_estimator | Total tokens: 1520
+2026-09-02 11:42:53,495 | INFO | src.recipe_generator.cost_estimator | Total estimated cost: 0.002316
+2026-09-02 11:42:53,495 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation completed
+2026-09-02 11:42:53,495 | INFO | __main__ | Total recipe workflow completed in 3.39 seconds
+2026-09-02 11:45:22,315 | INFO | __main__ | Streamlit request received: i want buldak noodles and peri peri chicken 
+2026-09-02 11:45:22,322 | INFO | src.recipe_generator.graph | Building LangGraph
+2026-09-02 11:45:22,347 | INFO | src.recipe_generator.graph | LangGraph compiled successfully
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_decision | Phase 12: Input decision started
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_router | No location detected in recommendation request
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_router | Input decision: defaulting to explicit recipe
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_router | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_decision | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_decision | Explicit recipe request detected
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.input_decision | Weather tool skipped for explicit request
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Orchestrator started
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Input mode: explicit
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Explicit recipe request detected
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Extracted dishes from user request: ['i want buldak noodles', 'peri peri chicken']
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Final dishes: ['i want buldak noodles', 'peri peri chicken']
+2026-09-02 11:45:22,354 | INFO | src.recipe_generator.orchestrator | Number of dishes: 2
+2026-09-02 11:45:22,366 | INFO | src.recipe_generator.research | MCP research started
+2026-09-02 11:45:22,366 | INFO | src.recipe_generator.research | MCP research queries: ['i want buldak noodles', 'peri peri chicken']
+2026-09-02 11:45:22,366 | INFO | src.recipe_generator.research | Number of MCP research queries: 2
+2026-09-02 11:45:22,367 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP batch research for 2 queries
+2026-09-02 11:45:22,367 | INFO | src.recipe_generator.mcp_client | MCP batch queries: ['i want buldak noodles', 'peri peri chicken']
+2026-09-02 11:45:22,370 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP research for 2 queries
+2026-09-02 11:45:22,370 | INFO | src.recipe_generator.mcp_client | MCP queries: ['i want buldak noodles', 'peri peri chicken']
+2026-09-02 11:45:22,409 | ERROR | src.recipe_generator.mcp_client | MCP session failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 201, in _search_multiple_recipes_async
+  |     async with streamable_http_client(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 688, in streamable_http_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 705, in streamable_http_client
+    |     yield read_stream, write_stream
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 203, in _search_multiple_recipes_async
+    |     ) as (
+    |          ^
+    | ValueError: not enough values to unpack (expected 3, got 2)
+    +------------------------------------
+2026-09-02 11:45:22,417 | INFO | src.recipe_generator.mcp_client | Parallel MCP batch research completed: 2 results
+2026-09-02 11:45:22,418 | INFO | src.recipe_generator.research | Research result 1/2 stored for dish: i want buldak noodles
+2026-09-02 11:45:22,418 | WARNING | src.recipe_generator.research | No research result returned for dish: i want buldak noodles
+2026-09-02 11:45:22,418 | INFO | src.recipe_generator.research | Research result 2/2 stored for dish: peri peri chicken
+2026-09-02 11:45:22,418 | WARNING | src.recipe_generator.research | No research result returned for dish: peri peri chicken
+2026-09-02 11:45:22,419 | INFO | src.recipe_generator.research | MCP research completed successfully
+2026-09-02 11:45:22,419 | INFO | src.recipe_generator.research | Number of research results: 2
+2026-09-02 11:45:22,419 | INFO | src.recipe_generator.research | MCP search time: 0.05 seconds
+2026-09-02 11:45:22,420 | INFO | src.recipe_generator.research | Total MCP research time: 0.05 seconds
+2026-09-02 11:45:22,420 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/2: i want buldak noodles
+2026-09-02 11:45:22,421 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: i want buldak noodles
+2026-09-02 11:45:22,421 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: i want buldak noodles
+2026-09-02 11:45:22,421 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: i want buldak noodles
+2026-09-02 11:45:22,421 | INFO | src.recipe_generator.llm | Creating Groq text model: openai/gpt-oss-20b
+2026-09-02 11:45:22,467 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 11:45:22,467 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1187 characters
+2026-09-02 11:45:23,544 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:45:23,553 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.08 seconds using openai/gpt-oss-20b
+2026-09-02 11:45:23,553 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 11:45:23,553 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=363 | output=516 | total=879
+2026-09-02 11:45:23,554 | INFO | src.recipe_generator.generator | Chef 1 response size: 490 characters
+2026-09-02 11:45:23,554 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{"name":"Buldak Noodles","description":"Spicy Korean ramen with fiery sauce.","ingredients":[{"name":"Ramen noodles","quantity":"200g"},{"name":"Buldak sauce","quantity":"1 cup"},{"name":"Sesame oil","quantity":"1 tbsp"},{"name":"Scallions","quantity":"2 stalks"},{"name":"Egg","quantity":"1"}],"instructions":["Boil noodles until al dente.","Drain and set aside.","Heat sauce with sesame oil.","Toss noodles in sauce.","Top with scallions and egg."],"cooking_time_minutes":30,"servings":2}
+2026-09-02 11:45:23,554 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 490 characters
+2026-09-02 11:45:23,558 | INFO | src.recipe_generator.generator | Chef 1 validation successful: Buldak Noodles
+2026-09-02 11:45:23,558 | INFO | src.recipe_generator.chefs | Chef 1 finished: Buldak Noodles in 1.14 seconds
+2026-09-02 11:45:23,558 | INFO | src.recipe_generator.chefs | Chef 1 token usage | input=363 | output=516 | total=879
+2026-09-02 11:45:23,558 | INFO | src.recipe_generator.chefs | Chef 1 recipe stored: Buldak Noodles
+2026-09-02 11:45:23,559 | INFO | src.recipe_generator.chefs | Chef 1 usage stored. Total usage records: 1
+2026-09-02 11:45:23,559 | INFO | src.recipe_generator.chefs | Chef progress: 1/2 dishes completed
+2026-09-02 11:45:23,559 | INFO | src.recipe_generator.chefs | More dishes remain. Next dish: peri peri chicken
+2026-09-02 11:45:23,559 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=2
+2026-09-02 11:45:23,560 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 11:45:23,560 | INFO | src.recipe_generator.chefs | Chef 2 processing dish 2/2: peri peri chicken
+2026-09-02 11:45:23,561 | INFO | src.recipe_generator.chefs | Chef 2 started for dish: peri peri chicken
+2026-09-02 11:45:23,561 | INFO | src.recipe_generator.chefs | Chef 2 using research for dish: peri peri chicken
+2026-09-02 11:45:23,561 | INFO | src.recipe_generator.generator | Chef 2 generating recipe for: peri peri chicken
+2026-09-02 11:45:23,561 | INFO | src.recipe_generator.generator | Chef 2 using model: openai/gpt-oss-20b
+2026-09-02 11:45:23,561 | INFO | src.recipe_generator.generator | Chef 2 prompt size: 1183 characters
+2026-09-02 11:45:24,646 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Chef 2 generation completed in 1.09 seconds using openai/gpt-oss-20b
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Chef 2 token usage | input=361 | output=700 | total=1061
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Chef 2 response size: 305 characters
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Chef 2 raw response:
+{
+  "name": "Peri Peri Chicken",
+  "description": "Spicy peri peri chicken, quick and flavorful.",
+  "ingredients": [
+    {"name": "chicken thighs", "quantity": "4 pieces"},
+    {"name": "peri peri sauce", "quantity": "3 tbsp"},
+    {"name": "olive oil", "quantity": "2 tbsp"},
+    {"name": "garlic cloves
+2026-09-02 11:45:24,646 | INFO | src.recipe_generator.generator | Chef 2 cleaned JSON size: 276 characters
+2026-09-02 11:45:24,646 | ERROR | src.recipe_generator.generator | Chef 2 returned invalid JSON.
+2026-09-02 11:45:24,646 | ERROR | src.recipe_generator.generator | Raw model response:
+{
+  "name": "Peri Peri Chicken",
+  "description": "Spicy peri peri chicken, quick and flavorful.",
+  "ingredients": [
+    {"name": "chicken thighs", "quantity": "4 pieces"},
+    {"name": "peri peri sauce", "quantity": "3 tbsp"},
+    {"name": "olive oil", "quantity": "2 tbsp"}
+2026-09-02 11:45:24,646 | ERROR | src.recipe_generator.chefs | Chef 2 failed while generating recipe for: peri peri chicken
+Traceback (most recent call last):
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\generator.py", line 428, in generate_recipe
+    json.loads(
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 7 column 48 (char 276)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\chefs.py", line 162, in chef_node
+    recipe, usage = generate_chef_recipe(
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\chefs.py", line 64, in generate_chef_recipe
+    recipe, usage = generate_recipe(
+                    ^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\generator.py", line 444, in generate_recipe
+    raise ValueError(
+ValueError: Chef 2 generated invalid JSON.
+2026-09-02 11:45:24,664 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=2
+2026-09-02 11:45:24,665 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 11:45:24,665 | INFO | src.recipe_generator.chefs | Chef 2 processing dish 2/2: peri peri chicken
+2026-09-02 11:45:24,666 | INFO | src.recipe_generator.chefs | Chef 2 started for dish: peri peri chicken
+2026-09-02 11:45:24,666 | INFO | src.recipe_generator.chefs | Chef 2 using research for dish: peri peri chicken
+2026-09-02 11:45:24,666 | INFO | src.recipe_generator.generator | Chef 2 generating recipe for: peri peri chicken
+2026-09-02 11:45:24,666 | INFO | src.recipe_generator.generator | Chef 2 using model: openai/gpt-oss-20b
+2026-09-02 11:45:24,666 | INFO | src.recipe_generator.generator | Chef 2 prompt size: 1183 characters
+2026-09-02 11:45:25,680 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 generation completed in 1.01 seconds using openai/gpt-oss-20b
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 token usage | input=361 | output=638 | total=999
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 response size: 713 characters
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 raw response:
+{
+  "name": "Peri Peri Chicken",
+  "description": "Spicy peri peri chicken with tangy citrus glaze.",
+  "ingredients": [
+    {"name": "chicken thighs", "quantity": "4 pieces"},
+    {"name": "peri peri sauce", "quantity": "3 tbsp"},
+    {"name": "olive oil", "quantity": "2 tbsp"},
+    {"name": "garlic cloves", "quantity": "3 minced"},
+    {"name": "lemon", "quantity": "1 sliced"}
+  ],
+  "instructions": [
+    "Marinate chicken in peri peri sauce, olive oil, garlic for 30 minutes.",
+    "Preheat grill to medium-high.",
+    "Place chicken on grill, cook 6-7 minutes per side.",
+    "Add lemon slices during last 2 minutes.",
+    "Serve hot with extra sauce."
+  ],
+  "cooking_time_minutes": 30,
+  "servings": 2
+}
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 cleaned JSON size: 713 characters
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.generator | Chef 2 validation successful: Peri Peri Chicken
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | Chef 2 finished: Peri Peri Chicken in 1.02 seconds
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | Chef 2 token usage | input=361 | output=638 | total=999
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | Chef 2 recipe stored: Peri Peri Chicken
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | Chef 2 usage stored. Total usage records: 2
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | Chef progress: 2/2 dishes completed
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.chefs | All dishes completed. Moving to summarizer.
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.graph | Chef routing | current_index=2 | total_dishes=2
+2026-09-02 11:45:25,680 | INFO | src.recipe_generator.graph | All dishes processed. Routing to collect.
+2026-09-02 11:45:25,688 | INFO | src.recipe_generator.graph | Collecting recipes
+2026-09-02 11:45:25,689 | INFO | src.recipe_generator.graph | Collected 2 recipes
+2026-09-02 11:45:25,689 | INFO | src.recipe_generator.graph | Summary Chef started | recipes=2
+2026-09-02 11:45:26,994 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 11:45:26,996 | INFO | src.recipe_generator.graph | Summary Chef completed successfully.
+2026-09-02 11:45:26,997 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation started
+2026-09-02 11:45:26,997 | INFO | src.recipe_generator.cost_estimator | Chef 1 | input=363 | output=516 | total=879 | cost=0.001395
+2026-09-02 11:45:26,997 | INFO | src.recipe_generator.cost_estimator | Chef 2 | input=361 | output=638 | total=999 | cost=0.001637
+2026-09-02 11:45:26,998 | INFO | src.recipe_generator.cost_estimator | Total input tokens: 724
+2026-09-02 11:45:26,998 | INFO | src.recipe_generator.cost_estimator | Total output tokens: 1154
+2026-09-02 11:45:26,998 | INFO | src.recipe_generator.cost_estimator | Total tokens: 1878
+2026-09-02 11:45:26,998 | INFO | src.recipe_generator.cost_estimator | Total estimated cost: 0.003032
+2026-09-02 11:45:26,998 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation completed
+2026-09-02 11:45:26,999 | INFO | __main__ | Total recipe workflow completed in 4.65 seconds
+2026-09-02 12:17:35,693 | ERROR | asyncio | Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-09-02 12:18:17,123 | INFO | __main__ | Streamlit request received: make zinger burger and pasta
+2026-09-02 12:18:17,123 | INFO | src.recipe_generator.graph | Building LangGraph
+2026-09-02 12:18:17,160 | INFO | src.recipe_generator.graph | LangGraph compiled successfully
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_decision | Phase 12: Input decision started
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_router | No location detected in recommendation request
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_router | Input decision: defaulting to explicit recipe
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_router | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_decision | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_decision | Explicit recipe request detected
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.input_decision | Weather tool skipped for explicit request
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Orchestrator started
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Input mode: explicit
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Explicit recipe request detected
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Extracted dishes from user request: ['make zinger burger', 'pasta']
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Final dishes: ['make zinger burger', 'pasta']
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.orchestrator | Number of dishes: 2
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.research | MCP research started
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.research | MCP research queries: ['make zinger burger', 'pasta']
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.research | Number of MCP research queries: 2
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP batch research for 2 queries
+2026-09-02 12:18:21,388 | INFO | src.recipe_generator.mcp_client | MCP batch queries: ['make zinger burger', 'pasta']
+2026-09-02 12:18:21,398 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP research for 2 queries
+2026-09-02 12:18:21,398 | INFO | src.recipe_generator.mcp_client | MCP queries: ['make zinger burger', 'pasta']
+2026-09-02 12:18:21,403 | ERROR | src.recipe_generator.mcp_client | MCP session failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 201, in _search_multiple_recipes_async
+  |     async with streamable_http_client(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 688, in streamable_http_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 705, in streamable_http_client
+    |     yield read_stream, write_stream
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 203, in _search_multiple_recipes_async
+    |     ) as (
+    |          ^
+    | ValueError: not enough values to unpack (expected 3, got 2)
+    +------------------------------------
+2026-09-02 12:18:21,409 | INFO | src.recipe_generator.mcp_client | Parallel MCP batch research completed: 2 results
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | Research result 1/2 stored for dish: make zinger burger
+2026-09-02 12:18:21,410 | WARNING | src.recipe_generator.research | No research result returned for dish: make zinger burger
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | Research result 2/2 stored for dish: pasta
+2026-09-02 12:18:21,410 | WARNING | src.recipe_generator.research | No research result returned for dish: pasta
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | MCP research completed successfully
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | Number of research results: 2
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | MCP search time: 0.01 seconds
+2026-09-02 12:18:21,410 | INFO | src.recipe_generator.research | Total MCP research time: 0.02 seconds
+2026-09-02 12:18:21,416 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/2: make zinger burger
+2026-09-02 12:18:21,416 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: make zinger burger
+2026-09-02 12:18:21,416 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: make zinger burger
+2026-09-02 12:18:21,416 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: make zinger burger
+2026-09-02 12:18:21,417 | INFO | src.recipe_generator.llm | Creating Groq text model: openai/gpt-oss-20b
+2026-09-02 12:18:21,473 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 12:18:21,475 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1184 characters
+2026-09-02 12:18:23,203 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.74 seconds using openai/gpt-oss-20b
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=362 | output=700 | total=1062
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 response size: 26 characters
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{
+  "name": "Zinger Burger
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 26 characters
+2026-09-02 12:18:23,206 | ERROR | src.recipe_generator.generator | Chef 1 returned invalid JSON.
+2026-09-02 12:18:23,206 | ERROR | src.recipe_generator.generator | Raw model response:
+{
+  "name": "Zinger Burger
+2026-09-02 12:18:23,206 | ERROR | src.recipe_generator.chefs | Chef 1 failed while generating recipe for: make zinger burger
+Traceback (most recent call last):
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\generator.py", line 428, in generate_recipe
+    json.loads(
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\json\decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 2 column 11 (char 12)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\chefs.py", line 162, in chef_node
+    recipe, usage = generate_chef_recipe(
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\chefs.py", line 64, in generate_chef_recipe
+    recipe, usage = generate_recipe(
+                    ^^^^^^^^^^^^^^^^
+  File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\generator.py", line 444, in generate_recipe
+    raise ValueError(
+ValueError: Chef 1 generated invalid JSON.
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.graph | Chef routing | current_index=0 | total_dishes=2
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/2: make zinger burger
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: make zinger burger
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: make zinger burger
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: make zinger burger
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 12:18:23,206 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1184 characters
+2026-09-02 12:18:24,421 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.21 seconds using openai/gpt-oss-20b
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=362 | output=461 | total=823
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 response size: 486 characters
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{"name":"Zinger Burger","description":"Spicy chicken burger with zesty sauce.","ingredients":[{"name":"Chicken breast","quantity":"200g"},{"name":"Spicy mayo","quantity":"2 tbsp"},{"name":"Lettuce leaf","quantity":"1"},{"name":"Burger bun","quantity":"1"},{"name":"Salt","quantity":"pinch"}],"instructions":["Season chicken with salt","Grill chicken until cooked","Spread spicy mayo on bun","Place lettuce and chicken on bun","Serve immediately"],"cooking_time_minutes":30,"servings":2}
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 486 characters
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.generator | Chef 1 validation successful: Zinger Burger
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | Chef 1 finished: Zinger Burger in 1.21 seconds
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | Chef 1 token usage | input=362 | output=461 | total=823
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | Chef 1 recipe stored: Zinger Burger
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | Chef 1 usage stored. Total usage records: 1
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | Chef progress: 1/2 dishes completed
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.chefs | More dishes remain. Next dish: pasta
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=2
+2026-09-02 12:18:24,421 | INFO | src.recipe_generator.graph | More dishes remaining. Routing back to chef_node.
+2026-09-02 12:18:24,431 | INFO | src.recipe_generator.chefs | Chef 2 processing dish 2/2: pasta
+2026-09-02 12:18:24,431 | INFO | src.recipe_generator.chefs | Chef 2 started for dish: pasta
+2026-09-02 12:18:24,431 | INFO | src.recipe_generator.chefs | Chef 2 using research for dish: pasta
+2026-09-02 12:18:24,431 | INFO | src.recipe_generator.generator | Chef 2 generating recipe for: pasta
+2026-09-02 12:18:24,432 | INFO | src.recipe_generator.generator | Chef 2 using model: openai/gpt-oss-20b
+2026-09-02 12:18:24,432 | INFO | src.recipe_generator.generator | Chef 2 prompt size: 1171 characters
+2026-09-02 12:18:25,485 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:18:25,503 | INFO | src.recipe_generator.generator | Chef 2 generation completed in 1.07 seconds using openai/gpt-oss-20b
+2026-09-02 12:18:25,504 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 12:18:25,504 | INFO | src.recipe_generator.generator | Chef 2 token usage | input=360 | output=440 | total=800
+2026-09-02 12:18:25,504 | INFO | src.recipe_generator.generator | Chef 2 response size: 570 characters
+2026-09-02 12:18:25,505 | INFO | src.recipe_generator.generator | Chef 2 raw response:
+{"name":"Garlic Parmesan Pasta","description":"Simple garlic and parmesan pasta, quick and flavorful.","ingredients":[{"name":"Spaghetti","quantity":"200g"},{"name":"Olive oil","quantity":"2 tbsp"},{"name":"Garlic cloves","quantity":"3, minced"},{"name":"Parmesan cheese","quantity":"1 cup, grated"},{"name":"Fresh parsley","quantity":"2 tbsp, chopped"}],"instructions":["Boil pasta until al dente.","Heat oil, sauté garlic until fragrant.","Add pasta, toss with oil.","Stir in parmesan, mix well.","Garnish with parsley, serve."],"cooking_time_minutes":20,"servings":2}
+2026-09-02 12:18:25,506 | INFO | src.recipe_generator.generator | Chef 2 cleaned JSON size: 570 characters
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.generator | Chef 2 validation successful: Garlic Parmesan Pasta
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | Chef 2 finished: Garlic Parmesan Pasta in 1.08 seconds
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | Chef 2 token usage | input=360 | output=440 | total=800
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | Chef 2 recipe stored: Garlic Parmesan Pasta
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | Chef 2 usage stored. Total usage records: 2
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | Chef progress: 2/2 dishes completed
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.chefs | All dishes completed. Moving to summarizer.
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.graph | Chef routing | current_index=2 | total_dishes=2
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.graph | All dishes processed. Routing to collect.
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.graph | Collecting recipes
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.graph | Collected 2 recipes
+2026-09-02 12:18:25,507 | INFO | src.recipe_generator.graph | Summary Chef started | recipes=2
+2026-09-02 12:18:26,725 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:18:26,726 | INFO | src.recipe_generator.graph | Summary Chef completed successfully.
+2026-09-02 12:18:26,727 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation started
+2026-09-02 12:18:26,727 | INFO | src.recipe_generator.cost_estimator | Chef 1 | input=362 | output=461 | total=823 | cost=0.001284
+2026-09-02 12:18:26,728 | INFO | src.recipe_generator.cost_estimator | Chef 2 | input=360 | output=440 | total=800 | cost=0.001240
+2026-09-02 12:18:26,728 | INFO | src.recipe_generator.cost_estimator | Total input tokens: 722
+2026-09-02 12:18:26,728 | INFO | src.recipe_generator.cost_estimator | Total output tokens: 901
+2026-09-02 12:18:26,728 | INFO | src.recipe_generator.cost_estimator | Total tokens: 1623
+2026-09-02 12:18:26,729 | INFO | src.recipe_generator.cost_estimator | Total estimated cost: 0.002524
+2026-09-02 12:18:26,729 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation completed
+2026-09-02 12:18:26,730 | INFO | __main__ | Total recipe workflow completed in 5.35 seconds
+2026-09-02 12:23:57,564 | INFO | __main__ | Streamlit request received: i want chocolate cake 
+2026-09-02 12:23:57,581 | INFO | src.recipe_generator.graph | Building LangGraph
+2026-09-02 12:23:57,633 | INFO | src.recipe_generator.graph | LangGraph compiled successfully
+2026-09-02 12:23:57,642 | INFO | src.recipe_generator.input_decision | Phase 12: Input decision started
+2026-09-02 12:23:57,642 | INFO | src.recipe_generator.input_router | No location detected in recommendation request
+2026-09-02 12:23:57,642 | INFO | src.recipe_generator.input_router | Input decision: defaulting to explicit recipe
+2026-09-02 12:23:57,642 | INFO | src.recipe_generator.input_router | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 12:23:57,642 | INFO | src.recipe_generator.input_decision | Input detection result: {'mode': 'explicit', 'location': None, 'mood': None}
+2026-09-02 12:23:57,652 | INFO | src.recipe_generator.input_decision | Explicit recipe request detected
+2026-09-02 12:23:57,652 | INFO | src.recipe_generator.input_decision | Weather tool skipped for explicit request
+2026-09-02 12:23:57,655 | INFO | src.recipe_generator.orchestrator | Orchestrator started
+2026-09-02 12:23:57,655 | INFO | src.recipe_generator.orchestrator | Input mode: explicit
+2026-09-02 12:23:57,655 | INFO | src.recipe_generator.orchestrator | Explicit recipe request detected
+2026-09-02 12:23:57,655 | INFO | src.recipe_generator.orchestrator | Extracted dishes from user request: ['i want chocolate cake']
+2026-09-02 12:23:57,656 | INFO | src.recipe_generator.orchestrator | Final dishes: ['i want chocolate cake']
+2026-09-02 12:23:57,656 | INFO | src.recipe_generator.orchestrator | Number of dishes: 1
+2026-09-02 12:23:57,657 | INFO | src.recipe_generator.research | MCP research started
+2026-09-02 12:23:57,657 | INFO | src.recipe_generator.research | MCP research queries: ['i want chocolate cake']
+2026-09-02 12:23:57,657 | INFO | src.recipe_generator.research | Number of MCP research queries: 1
+2026-09-02 12:23:57,658 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP batch research for 1 queries
+2026-09-02 12:23:57,658 | INFO | src.recipe_generator.mcp_client | MCP batch queries: ['i want chocolate cake']
+2026-09-02 12:23:57,659 | INFO | src.recipe_generator.mcp_client | Starting parallel MCP research for 1 queries
+2026-09-02 12:23:57,659 | INFO | src.recipe_generator.mcp_client | MCP queries: ['i want chocolate cake']
+2026-09-02 12:23:57,706 | ERROR | src.recipe_generator.mcp_client | MCP session failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 201, in _search_multiple_recipes_async
+  |     async with streamable_http_client(
+  |                ^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 688, in streamable_http_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\.venv\Lib\site-packages\mcp\client\streamable_http.py", line 705, in streamable_http_client
+    |     yield read_stream, write_stream
+    |   File "C:\Users\PMLS\OneDrive\TkXel_internship\Agentic_AI\recipe-generator\src\recipe_generator\mcp_client.py", line 203, in _search_multiple_recipes_async
+    |     ) as (
+    |          ^
+    | ValueError: not enough values to unpack (expected 3, got 2)
+    +------------------------------------
+2026-09-02 12:23:57,714 | INFO | src.recipe_generator.mcp_client | Parallel MCP batch research completed: 1 results
+2026-09-02 12:23:57,714 | INFO | src.recipe_generator.research | Research result 1/1 stored for dish: i want chocolate cake
+2026-09-02 12:23:57,714 | WARNING | src.recipe_generator.research | No research result returned for dish: i want chocolate cake
+2026-09-02 12:23:57,715 | INFO | src.recipe_generator.research | MCP research completed successfully
+2026-09-02 12:23:57,715 | INFO | src.recipe_generator.research | Number of research results: 1
+2026-09-02 12:23:57,715 | INFO | src.recipe_generator.research | MCP search time: 0.06 seconds
+2026-09-02 12:23:57,716 | INFO | src.recipe_generator.research | Total MCP research time: 0.06 seconds
+2026-09-02 12:23:57,717 | INFO | src.recipe_generator.chefs | Chef 1 processing dish 1/1: i want chocolate cake
+2026-09-02 12:23:57,717 | INFO | src.recipe_generator.chefs | Chef 1 started for dish: i want chocolate cake
+2026-09-02 12:23:57,717 | INFO | src.recipe_generator.chefs | Chef 1 using research for dish: i want chocolate cake
+2026-09-02 12:23:57,717 | INFO | src.recipe_generator.generator | Chef 1 generating recipe for: i want chocolate cake
+2026-09-02 12:23:57,717 | INFO | src.recipe_generator.generator | Chef 1 using model: openai/gpt-oss-20b
+2026-09-02 12:23:57,718 | INFO | src.recipe_generator.generator | Chef 1 prompt size: 1187 characters
+2026-09-02 12:23:59,248 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:23:59,254 | INFO | src.recipe_generator.generator | Chef 1 generation completed in 1.54 seconds using openai/gpt-oss-20b
+2026-09-02 12:23:59,254 | INFO | src.recipe_generator.generator | Response metadata | model=openai/gpt-oss-20b | provider=groq
+2026-09-02 12:23:59,254 | INFO | src.recipe_generator.generator | Chef 1 token usage | input=362 | output=593 | total=955
+2026-09-02 12:23:59,254 | INFO | src.recipe_generator.generator | Chef 1 response size: 540 characters
+2026-09-02 12:23:59,254 | INFO | src.recipe_generator.generator | Chef 1 raw response:
+{"name":"Chocolate Cake","description":"Rich chocolate cake, simple and delicious.","ingredients":[{"name":"All-purpose flour","quantity":"1 cup"},{"name":"Unsweetened cocoa powder","quantity":"1/2 cup"},{"name":"Granulated sugar","quantity":"1 cup"},{"name":"Eggs","quantity":"2 large"},{"name":"Unsalted butter","quantity":"1/2 cup, melted"}],"instructions":["Preheat oven to 350°F.","Whisk flour, cocoa, and sugar.","Add eggs and melted butter.","Pour batter into greased pan.","Bake 25 minutes."],"cooking_time_minutes":30,"servings":2}
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.generator | Chef 1 cleaned JSON size: 540 characters
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.generator | Chef 1 validation successful: Chocolate Cake
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | Chef 1 finished: Chocolate Cake in 1.55 seconds
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | Chef 1 token usage | input=362 | output=593 | total=955
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | Chef 1 recipe stored: Chocolate Cake
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | Chef 1 usage stored. Total usage records: 1
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | Chef progress: 1/1 dishes completed
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.chefs | All dishes completed. Moving to summarizer.
+2026-09-02 12:23:59,260 | INFO | src.recipe_generator.graph | Chef routing | current_index=1 | total_dishes=1
+2026-09-02 12:23:59,269 | INFO | src.recipe_generator.graph | All dishes processed. Routing to collect.
+2026-09-02 12:23:59,270 | INFO | src.recipe_generator.graph | Collecting recipes
+2026-09-02 12:23:59,270 | INFO | src.recipe_generator.graph | Collected 1 recipes
+2026-09-02 12:23:59,272 | INFO | src.recipe_generator.graph | Summary Chef started | recipes=1
+2026-09-02 12:24:00,034 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-02 12:24:00,038 | INFO | src.recipe_generator.graph | Summary Chef completed successfully.
+2026-09-02 12:24:00,039 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation started
+2026-09-02 12:24:00,040 | INFO | src.recipe_generator.cost_estimator | Chef 1 | input=362 | output=593 | total=955 | cost=0.001548
+2026-09-02 12:24:00,040 | INFO | src.recipe_generator.cost_estimator | Total input tokens: 362
+2026-09-02 12:24:00,040 | INFO | src.recipe_generator.cost_estimator | Total output tokens: 593
+2026-09-02 12:24:00,040 | INFO | src.recipe_generator.cost_estimator | Total tokens: 955
+2026-09-02 12:24:00,041 | INFO | src.recipe_generator.cost_estimator | Total estimated cost: 0.001548
+2026-09-02 12:24:00,041 | INFO | src.recipe_generator.cost_estimator | Phase 13: Token cost estimation completed
+2026-09-02 12:24:00,042 | INFO | __main__ | Total recipe workflow completed in 2.40 seconds
