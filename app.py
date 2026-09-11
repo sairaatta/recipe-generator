@@ -382,7 +382,7 @@ if input_type == "🍽️ Recipe Request":
         st.image(
             uploaded_image,
             caption="Reference image",
-            width="stretch",
+            width=300,
         )
 
         st.success(
@@ -559,6 +559,8 @@ if generate_button:
             initial_state = RecipeState(
                 user_request=user_request.strip(),
                 image_path=image_path,
+                image_description="",
+
             )
 
             # ------------------------------------------------
@@ -643,6 +645,26 @@ if generate_button:
             '<hr class="section-divider">',
             unsafe_allow_html=True,
         )
+        
+                # ====================================================
+        # INVALID REQUEST
+        # ====================================================
+
+        if result.get("input_mode") == "invalid":
+
+            progress.progress(
+                100,
+                text="Request rejected.",
+            )
+
+            status.warning(
+                result.get(
+                    "rejection_reason",
+                    "That's not a recipe-related request."
+                )
+            )
+
+            st.stop()
 
         st.header("📊 Workflow Summary")
 

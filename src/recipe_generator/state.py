@@ -25,6 +25,14 @@ class RecipeState(BaseModel):
     dishes: list[str] = Field(default_factory=list)
 
     input_mode: str = "unknown"
+    
+        # --------------------------------------------------
+    # INPUT VALIDATION
+    # --------------------------------------------------
+
+    input_valid: bool = True
+
+    rejection_reason: str | None = None
 
     mood: str | None = None
 
@@ -41,6 +49,9 @@ class RecipeState(BaseModel):
     image_path: Optional[str] = None
 
     image_dish: Optional[str] = None
+    
+    image_description: str | None
+    
 
     # --------------------------------------------------
     # MCP RESEARCH

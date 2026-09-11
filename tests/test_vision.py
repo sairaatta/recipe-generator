@@ -2,8 +2,7 @@ from pathlib import Path
 
 from src.recipe_generator.vision import identify_dish
 
-
-image_path = Path("tests/images/Bulgogi-bibimbap-recipe.jpg")
+image_path = Path("tests/images/image1.jpg")
 
 if not image_path.exists():
     raise FileNotFoundError(

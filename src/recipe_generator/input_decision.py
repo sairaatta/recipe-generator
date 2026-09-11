@@ -104,7 +104,7 @@ def input_decision(state: RecipeState):
 
     mode = result.get(
         "mode",
-        "explicit",
+        "invalid",
     )
 
     location = result.get(
@@ -119,6 +119,29 @@ def input_decision(state: RecipeState):
         "Input detection result: %s",
         result,
     )
+    
+        # ==========================================================
+    # INVALID / UNRELATED REQUEST
+    # ==========================================================
+
+    if mode == "invalid":
+
+        logger.warning(
+            "Invalid recipe request rejected: %s",
+            user_request,
+        )
+
+        return {
+            "input_mode": "invalid",
+            "input_valid": False,
+            "rejection_reason": (
+                "That's not a food or recipe-related request. "
+                "Please ask me for a recipe, cooking idea, "
+                "or food recommendation."
+            ),
+            "weather_context": None,
+            "dishes": [],
+        }
 
     # ==========================================================
     # EXPLICIT RECIPE REQUEST

@@ -1,6 +1,7 @@
 import base64
 import io
 import logging
+import os
 import time
 
 import requests
@@ -61,7 +62,7 @@ def preprocess_image(image_path: str) -> str:
             image = image.convert("RGB")
 
     # Don't enlarge small images
-    max_size = 512
+    max_size = 1024
 
     if max(image.size) > max_size:
 
@@ -77,6 +78,19 @@ def preprocess_image(image_path: str) -> str:
         buffer,
         format="JPEG",
         quality=95,
+    )
+    
+    debug_path = "debug_preprocessed.jpg"
+
+    image.save(
+        debug_path,
+        format="JPEG",
+        quality=95,
+    )
+    
+    logger.info(
+        "Saved debug image to: %s",
+        os.path.abspath(debug_path),
     )
 
     image_base64 = base64.b64encode(
@@ -103,28 +117,37 @@ def describe_food_image(image_path: str) -> str:
         image_path,
     )
 
+    # --------------------------------------------------------
+    # PREPROCESS IMAGE
+    # --------------------------------------------------------
+
     image_base64 = preprocess_image(
         image_path
     )
 
+    # --------------------------------------------------------
+    # VISION PROMPT
+    # --------------------------------------------------------
+
     prompt = """
-        Look at this image.
-        
-        Identify the main food or dish.
-        
-        Return ONLY the common dish name.
-        
-        Examples:
-        biryani
-        pizza
-        burger
-        pasta
-        fried rice
-        sandwich
-        salad
-        
-        Do not explain.
-        """
+Identify the food or dish shown in this image.
+
+Look at the visible ingredients, appearance, shape, texture,
+and presentation.
+
+Return ONLY the most likely dish name.
+
+Do not explain your reasoning.
+Do not describe the image.
+Do not list alternatives.
+
+If the food cannot be identified reliably, return:
+unknown
+"""
+
+    # --------------------------------------------------------
+    # OLLAMA REQUEST
+    # --------------------------------------------------------
 
     payload = {
         "model": VISION_MODEL,
@@ -141,11 +164,9 @@ def describe_food_image(image_path: str) -> str:
 
         "stream": False,
 
-        # Important:
-        # Give Qwen enough output space.
         "options": {
-            "temperature": 0,
-            "num_predict": 20,
+            "temperature": 0.1,
+            "num_predict": 128,
         },
     }
 
@@ -158,6 +179,10 @@ def describe_food_image(image_path: str) -> str:
     )
 
     response.raise_for_status()
+
+    # --------------------------------------------------------
+    # PARSE RESPONSE
+    # --------------------------------------------------------
 
     data = response.json()
 
@@ -172,34 +197,80 @@ def describe_food_image(image_path: str) -> str:
         elapsed,
     )
 
-    # --------------------------------------------------------
-    # IMPORTANT
-    # --------------------------------------------------------
-
-    content = (
-        data
-        .get("message", {})
-        .get("content", "")
+    # IMPORTANT:
+    # Get message BEFORE accessing content.
+    message = data.get(
+        "message",
+        {},
     )
 
-    content = content.strip()
+    content = message.get(
+        "content",
+        "",
+    ).strip()
+
+    thinking = message.get(
+        "thinking",
+        "",
+    ).strip()
+
+    done_reason = data.get(
+        "done_reason",
+        "",
+    )
+
+    # --------------------------------------------------------
+    # DEBUG LOGGING
+    # --------------------------------------------------------
 
     logger.info(
-        "%s raw description: %s",
+        "%s raw content: %r",
         VISION_MODEL,
         content,
     )
 
+    logger.info(
+        "%s thinking: %r",
+        VISION_MODEL,
+        thinking,
+    )
+
+    logger.info(
+        "%s done reason: %s",
+        VISION_MODEL,
+        done_reason,
+    )
+
+    # --------------------------------------------------------
+    # EMPTY RESPONSE
+    # --------------------------------------------------------
+
     if not content:
 
         logger.warning(
-            "%s returned empty content. "
-            "Full response: %s",
+            "%s returned empty content.",
             VISION_MODEL,
-            data,
         )
 
+        if done_reason == "length":
+
+            logger.warning(
+                "%s reached num_predict limit "
+                "before producing final answer.",
+                VISION_MODEL,
+            )
+
         return "unknown"
+
+    # --------------------------------------------------------
+    # FINAL RESULT
+    # --------------------------------------------------------
+
+    logger.info(
+        "%s final vision result: %s",
+        VISION_MODEL,
+        content,
+    )
 
     return content
 

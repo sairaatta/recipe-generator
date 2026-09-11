@@ -418,6 +418,7 @@ def detect_input_mode(
 
         explicit recipe
         recommendation
+        invalid
 
     Also extract:
 
@@ -428,7 +429,7 @@ def detect_input_mode(
     if not user_request:
 
         return {
-            "mode": "explicit",
+            "mode": "invalid",
             "location": None,
             "mood": None,
         }
@@ -499,16 +500,13 @@ def detect_input_mode(
     else:
 
         # ----------------------------------------------------
-        # Unknown/general text.
-        #
-        # Keep existing behavior as explicit recipe rather
-        # than sending arbitrary text to weather.
+        # Unknown / unrelated text
         # ----------------------------------------------------
 
-        mode = "explicit"
+        mode = "invalid"
 
         logger.info(
-            "Input decision: defaulting to explicit recipe"
+            "Input decision: invalid recipe request"
         )
 
     # ========================================================

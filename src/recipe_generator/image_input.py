@@ -1,43 +1,38 @@
 import logging
 
-from .vision import describe_food_image
+from .state import RecipeState
+from .vision import identify_dish
 
 logger = logging.getLogger(__name__)
 
 
-def image_input(state):
-    """
-    Phase 12:
-    Analyze the optional image using qwen3-vl:2b.
-    """
+def image_input(state: RecipeState):
 
-    image_path = state.image_path
-
-    if not image_path:
-        logger.info(
-            "Phase 12: No image provided"
-        )
-
+    if not state.image_path:
+        logger.info("No image provided")
         return {}
 
     logger.info(
-        "Phase 12: Image provided: %s",
-        image_path,
+        "Analyzing uploaded image: %s",
+        state.image_path,
     )
 
-    description = describe_food_image(
-        image_path
-    )
-
-    logger.info(
-        "Phase 12: Image analysis completed"
+    dish_name = identify_dish(
+        state.image_path
     )
 
     logger.info(
-        "Phase 12: Image description: %s",
-        description,
+        "FINAL VISION DISH: %s",
+        dish_name,
     )
+
+    if not dish_name:
+        return {
+            "image_dish": "unknown",
+            "dishes": [],
+        }
 
     return {
-        "image_description": description,
+        "image_dish": dish_name,
+        "dishes": [dish_name],
     }

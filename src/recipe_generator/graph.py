@@ -5,11 +5,15 @@ from langgraph.graph import StateGraph, START, END
 
 from .state import RecipeState
 from .input_decision import input_decision
+
+from .image_input import image_input
+
 from .orchestrator import orchestrator
 from .research import mcp_research
 from .chefs import chef_node
 from .summary_chef import summarize_recipes
 from .cost_estimator import estimate_costs
+
 
 
 logger = logging.getLogger(__name__)
@@ -156,6 +160,34 @@ def summary_chef_node(state: RecipeState):
         }
 
 
+
+# ============================================================
+# INPUT ROUTING
+# ============================================================
+
+def route_after_input_decision(state: RecipeState):
+    """
+    Decide whether the request should continue
+    or be rejected.
+    """
+
+    if state.input_mode == "invalid":
+
+        logger.info(
+            "Invalid request detected. "
+            "Routing directly to END."
+        )
+
+        return "end"
+
+    logger.info(
+        "Valid input detected. "
+        "Routing to orchestrator."
+    )
+
+    return "orchestrator"
+
+
 # ============================================================
 # BUILD GRAPH
 # ============================================================
@@ -203,7 +235,12 @@ def build_recipe_graph():
         "input_decision",
         input_decision,
     )
-
+    
+    builder.add_node(
+    "image_input",
+    image_input,
+)
+    
     builder.add_node(
         "orchestrator",
         orchestrator,
@@ -247,10 +284,19 @@ def build_recipe_graph():
     # INPUT DECISION → ORCHESTRATOR
     # ========================================================
 
+    builder.add_conditional_edges(
+    "input_decision",
+    route_after_input_decision,
+    {
+        "orchestrator": "image_input",
+        "end": END,
+    },
+)
+    
     builder.add_edge(
-        "input_decision",
-        "orchestrator",
-    )
+    "image_input",
+    "orchestrator",
+)
 
     # ========================================================
     # ORCHESTRATOR → MCP RESEARCH
